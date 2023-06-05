@@ -1,4 +1,8 @@
 const express = require('express')
+const cors  = require('cors');//Implementar seguridad
+const bodyParser = require('body-parser')//Recibir datos de formularios html
+
+const dbConection = require('../database/config')
 //Instalar el paquete dotenv
 
 class server{
@@ -8,22 +12,31 @@ class server{
 
         this.port = process.env.PORT
 
-        this.productoPath = '/api/producto' //Ruta pública de la API
+        this.usuarioPath = '/api/usuario' //Ruta pública de la API
 
         this.middlewares()//Seguridad
 
         this.routes()
+
+        this.dbConectar()
 
     }
 
     middlewares() //Directorio Publico
     {
         this.app.use(express.static(__dirname + "/public"));
+        this.app.use( cors() );
+        this.app.use(bodyParser.json()) // for parsing application/json
+
     }
 
     routes()
     {
-        this.app.use(this.productoPath, require('../routes/productos'))
+        this.app.use(this.usuarioPath, require('../routes/usuarios'))
+    }
+
+    async dbConectar(){
+        await dbConection()
     }
 
     listen() {
