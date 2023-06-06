@@ -39,14 +39,14 @@ const postUsuario = async(req, res = response) =>{
 
 const putUsuario = async(req, res = response) =>{
     //Actualización de datos
-    const body = req.query //Desestructuración
+    const body = req.body //Desestructuración
     
 
     let mensaje = ''
 
     try {
         if(body.tipoModificacion == 'Unitaria'){
-            await Usuario.findOneAndUpdate({password:body.password}, {rol:body.rol, estado:body.estado})
+            await Usuario.findOneAndUpdate({nombre:body.nombre}, {rol:body.rol, estado:body.estado})
             mensaje = 'Usuario modificado exitosamente. Modificación: Sencilla'
         }
         else{
@@ -62,7 +62,7 @@ const putUsuario = async(req, res = response) =>{
     }
     //console.log('---------------'+mensaje)
     res.json({
-        mensaje
+        mensaje:mensaje
     })
    
 }
@@ -91,3 +91,7 @@ module.exports = {
     putUsuario,
     deleteUsuario
 }
+
+
+
+
