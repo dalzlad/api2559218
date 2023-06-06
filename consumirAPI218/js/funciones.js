@@ -54,8 +54,52 @@ const registrarUsuario = async() =>{
     }
 }
 
-document.querySelector('#btnRegistrar')
-.addEventListener('click', registrarUsuario)
+const actualizarUsuario = async() =>{
+    //Captura de valores de datos enviados desde el formulario
+    let nombre = document.getElementById('nombre').value
+    let password = document.getElementById('password').value
+    let confirmarPassword = document.getElementById('confirmarPassword').value
+    let rol = document.getElementById('rol').value
+    let estado = document.getElementById('estado').value
+
+    let usuario = {
+        nombre: nombre,
+        password: password,
+        rol: rol,
+        estado: estado,
+        tipoModificacion: 'Unitaria'
+    }
+
+    if((password.length >0 && confirmarPassword.length>0) && (password == confirmarPassword)){
+        fetch(url, {
+            method: 'PUT',
+            mode: 'cors',
+            body:JSON.stringify(usuario),
+            headers: {"Content-type": "application/json; charset=UTF-8"}     
+        })
+        .then(response => response.json()) //La respuesta del método POST de la API
+        .then(json => {
+           alert(json.mensaje)
+        })
+    }
+    else{
+        alert('El password y la confirmación del Password no coinciden. Por favor verifique')
+    }
+}
+
+
+if(document.querySelector('#btnRegistrar'))
+{
+    document.querySelector('#btnRegistrar')
+    .addEventListener('click', registrarUsuario)
+}
+
+if(document.querySelector('#btnActualizar'))
+{
+    document.querySelector('#btnActualizar')
+.addEventListener('click', actualizarUsuario)
+}
+
 
 //Installar en la api(backend) los paquetes:
 //cors
