@@ -12,7 +12,9 @@ const listarUsuarios = async() => {
             listarUsuarios.map((usuario) => {
                 mensaje += `<tr><td>${usuario.nombre}</td>`+
                 `<td>${usuario.rol}</td>`+
-                `<td>${usuario.estado? 'Activo':'Inactivo' }</td></tr>`
+                `<td>${usuario.estado? 'Activo':'Inactivo' }</td>`+
+                `<td><a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick='editar(${JSON.stringify(usuario)})'>Editar</a>
+                </td></tr>`
                 body.innerHTML = mensaje
             }   
             )
@@ -52,6 +54,20 @@ const registrarUsuario = async() =>{
     else{
         alert('El password y la confirmación del Password no coinciden. Por favor verifique')
     }
+}
+
+const editar = (usuario) =>{
+    document.getElementById('nombre').value = ''
+    document.getElementById('password').value = ''
+    document.getElementById('confirmarPassword').value = ''
+    document.getElementById('rol').value = ''
+    document.getElementById('estado').value = ''
+
+    document.getElementById('nombre').value = usuario.nombre
+    document.getElementById('password').value = usuario.password
+    document.getElementById('confirmarPassword').value = usuario.password
+    document.getElementById('rol').value = usuario.rol
+    document.getElementById('estado').value = usuario.estado
 }
 
 const actualizarUsuario = async() =>{

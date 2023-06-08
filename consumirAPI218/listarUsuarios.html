@@ -6,12 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <title>Listar Usuarios</title>
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
- 
 </head>
 <body>
     <div class="container">
@@ -27,6 +25,9 @@
                     <th>
                         Estado
                     </th>
+                    <th>
+                        Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody id="contenido">
@@ -35,6 +36,86 @@
         </table>
     </div>
     
+    
+  <!-- Modal Trigger -->
+  
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+
+        <div class="container">
+            <div class="row">
+                <form class="col s12">
+    
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">account_circle</i>
+                      <input id="nombre" type="text" class="validate" placeholder="Nombre">
+                      <label for="nombre">Nombre de Usuario</label>
+                    </div>
+                    <div class="input-field col s12">
+                      <i class="material-icons prefix">lock</i>
+                      <input id="password" type="tel" class="validate" placeholder="Password">
+                      <label for="password">Contraseña</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="confirmarPassword" type="tel" class="validate">
+                        <label for="confirmarPassword">Confirmar Contraseña</label>
+                    </div>
+                    <div class="input-field col s12">
+                        <select class="browser-default" id="rol">
+                          <option value="" disabled selected>Elija el rol</option>
+                          <option value="Admin">Administrador</option>
+                          <option value="Asesor">Asesor</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12">
+                        <select class="browser-default" id="estado">
+                          <option value="" disabled selected>Elija el estado</option>
+                          <option value="true">Activo</option>
+                          <option value="false">Inactivo</option>
+                        </select>
+                    </div>
+                    <div class="input-field col s12">
+                        <button id="btnActualizar" class="btn waves-effect waves-light" type="button" name="action">Actualizar
+                            <i class="material-icons right">send</i>
+                          </button>
+                    </div>
+                  
+                </form>
+              </div>
+        </div>
+    
+
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+ 
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+     
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+   
+
+
+<script>
+        
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    //var instances = M.Modal.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+    </script>
     <script src="js/funciones.js"></script>
+
+
 </body>
 </html>
