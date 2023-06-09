@@ -40,13 +40,15 @@ const postUsuario = async(req, res = response) =>{
 const putUsuario = async(req, res = response) =>{
     //Actualización de datos
     const body = req.body //Desestructuración
-    
+     console.log(body)
 
     let mensaje = ''
 
     try {
         if(body.tipoModificacion == 'Unitaria'){
-            await Usuario.findOneAndUpdate({nombre:body.nombre}, {rol:body.rol, estado:body.estado})
+//            await Usuario.findOneAndUpdate({nombre:body.nombre}, {rol:body.rol, estado:body.estado})
+            await Usuario.findOneAndUpdate({_id:body._id}, {rol:body.rol, estado:body.estado})
+
             mensaje = 'Usuario modificado exitosamente. Modificación: Sencilla'
         }
         else{
@@ -69,11 +71,11 @@ const putUsuario = async(req, res = response) =>{
 
 const deleteUsuario = async(req, res = response) =>{
     //Actualización de datos
-    const body = req.query //Desestructuración
+    const body = req.body//Desestructuración
     let mensaje = ''
 
     try {
-        await Usuario.findOneAndDelete({nombre:body.nombre})
+        await Usuario.deleteOne({_id:body._id})
         mensaje = 'Eliminado exitosamente'
     } catch (error) {
         mensaje = error

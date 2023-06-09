@@ -14,6 +14,7 @@ const listarUsuarios = async() => {
                 `<td>${usuario.rol}</td>`+
                 `<td>${usuario.estado? 'Activo':'Inactivo' }</td>`+
                 `<td><a class="waves-effect waves-light btn modal-trigger" href="#modal1" onclick='editar(${JSON.stringify(usuario)})'>Editar</a>
+                 <a class="waves-effect waves-light btn modal-trigger red" href="#" onclick='eliminar("${usuario._id}")'>Eliminar</a>
                 </td></tr>`
                 body.innerHTML = mensaje
             }   
@@ -57,12 +58,14 @@ const registrarUsuario = async() =>{
 }
 
 const editar = (usuario) =>{
+    document.getElementById('_id').value = ''
     document.getElementById('nombre').value = ''
     document.getElementById('password').value = ''
     document.getElementById('confirmarPassword').value = ''
     document.getElementById('rol').value = ''
     document.getElementById('estado').value = ''
 
+    document.getElementById('_id').value = usuario._id
     document.getElementById('nombre').value = usuario.nombre
     document.getElementById('password').value = usuario.password
     document.getElementById('confirmarPassword').value = usuario.password
@@ -79,6 +82,7 @@ const actualizarUsuario = async() =>{
     let estado = document.getElementById('estado').value
 
     let usuario = {
+        _id: document.getElementById('_id').value,
         nombre: nombre,
         password: password,
         rol: rol,
@@ -103,6 +107,27 @@ const actualizarUsuario = async() =>{
     }
 }
 
+const eliminar =(_id) => {
+    if(confirm('¿Está seguro de realizar la eliminación?') == true){
+            //Captura de valores de datos enviados desde el formulario
+    let usuario = {
+        _id: _id
+    }
+    
+    //console.log(usuario)
+
+       fetch(url, {
+            method: 'DELETE',
+            mode: 'cors',
+            body:JSON.stringify(usuario),
+            headers: {"Content-type": "application/json; charset=UTF-8"}     
+        })
+        .then(response => response.json()) //La respuesta del método POST de la API
+        .then(json => {
+           alert(json.mensaje)
+        })     
+    }
+}
 
 if(document.querySelector('#btnRegistrar'))
 {
