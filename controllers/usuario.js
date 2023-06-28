@@ -1,5 +1,7 @@
 const {response} = require('express')
+const bcrypt = require('bcrypt') //Importar libreria para encriptar
 const Usuario = require('../models/usuario')
+
 
 //Consulta
 const getUsuario = async(req, res=response) => {
@@ -23,6 +25,8 @@ const postUsuario = async(req, res = response) =>{
     const body = req.body //Desestructuración
     let mensaje = ''
     const usuario = new Usuario(body) // Crear el objeto
+    usuario.password = bcrypt.hashSync(body.password, 10) //Encriptar
+
     console.log(body)
     try {
         await usuario.save()
@@ -94,6 +98,9 @@ module.exports = {
     deleteUsuario
 }
 
+/*
+bcrypt
 
+*/
 
 

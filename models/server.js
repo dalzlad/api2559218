@@ -13,6 +13,8 @@ class server{
         this.port = process.env.PORT
 
         this.usuarioPath = '/api/usuario' //Ruta pública de la API
+        this.authPath = '/api/auth' //Ruta pública de la API
+
 
         this.middlewares()//Seguridad
 
@@ -33,6 +35,7 @@ class server{
     routes()
     {
         this.app.use(this.usuarioPath, require('../routes/usuarios'))
+        this.app.use(this.authPath, require('../routes/auth'))
     }
 
     async dbConectar(){
