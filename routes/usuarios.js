@@ -4,10 +4,12 @@ const route = Router()
 
 //Importar el controlador
 const {getUsuario, postUsuario, putUsuario, deleteUsuario} = require('../controllers/usuario')
+const  {isAuthenticated}  = require('../controllers/auth')
 
-route.get('/', getUsuario)
 
-route.post('/', postUsuario)
+route.get('/', isAuthenticated, getUsuario)
+
+route.post('/', isAuthenticated, postUsuario)
 
 route.put('/', putUsuario)
 

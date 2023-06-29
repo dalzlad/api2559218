@@ -1,3 +1,4 @@
+const cookieParser = require('cookie-parser');
 const express = require('express')
 const cors  = require('cors');//Implementar seguridad
 const bodyParser = require('body-parser')//Recibir datos de formularios html
@@ -14,7 +15,7 @@ class server{
 
         this.usuarioPath = '/api/usuario' //Ruta pública de la API
         this.authPath = '/api/auth' //Ruta pública de la API
-
+        this.productoPath = '/api/producto'
 
         this.middlewares()//Seguridad
 
@@ -26,16 +27,18 @@ class server{
 
     middlewares() //Directorio Publico
     {
+        this.app.use(cookieParser()); 
         this.app.use(express.static(__dirname + "/public"));
         this.app.use( cors() );
         this.app.use(bodyParser.json()) // for parsing application/json
-
     }
 
     routes()
     {
         this.app.use(this.usuarioPath, require('../routes/usuarios'))
         this.app.use(this.authPath, require('../routes/auth'))
+        this.app.use(this.productoPath, require('../routes/productos'))
+
     }
 
     async dbConectar(){
